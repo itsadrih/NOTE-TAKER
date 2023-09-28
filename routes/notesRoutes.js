@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router(); 
-const fs = require('fs');
+  const express = require('express');
+ const router = express.Router(); 
+ const fs = require('fs');
 
 router.get('/', (req, res) => {
-  fs.readFile('db.json', 'utf8', (err, data) => {
+  readFile('db.json', 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading db.json:', err);
       res.status(500).json({ error: 'An error occurred while reading notes' });
@@ -33,7 +33,7 @@ function generateUniqueId() {
 
 
 function saveNoteToDB(note) {
-  fs.readFile('db.json', 'utf8', (err, data) => {
+  readFile('db.json', 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading db.json:', err);
       return;
@@ -42,7 +42,7 @@ function saveNoteToDB(note) {
     const notes = JSON.parse(data);
     notes.push(note);
 
-    fs.writeFile('db.json', JSON.stringify(notes, null, 2), 'utf8', (err) => {
+    writeFile('db.json', JSON.stringify(notes, null, 2), 'utf8', (err) => {
       if (err) {
         console.error('Error writing to db.json:', err);
       } else {
